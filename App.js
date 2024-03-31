@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import WelcomeScreen from "./components/WelcomeScreen";
+import WelcomeScreen from "./components/HeroSection";
 import Header from './components/Header';
 import Footer from './components/Footer';
+import HeroSection from './components/HeroSection';
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
           backgroundColor: 'black',
         }}>
         <Header/>
-        <WelcomeScreen />
+        <HeroSection />
         <Footer/>
       </View>
       <View style={{ backgroundColor: '#495E57' }}>
