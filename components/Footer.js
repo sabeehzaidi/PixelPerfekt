@@ -1,21 +1,33 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import colors from '../styles/colors';
+import fonts from '../styles/fonts';
 
 export default function Footer() {
   return (
     <View
-      style={{
-        backgroundColor: '#F4CE14',
-        marginBottom: 10,
-      }}>
+      style={styles.container}>
       <Text
-        style={{
-          fontSize: 18,
-          color: 'black',
-          textAlign: 'center',
-        }}>
+        style={styles.bodyText}>
         All rights reserved by Pixel Perfekt Inc, 2024{' '}
       </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+  container: {
+    backgroundColor: colors.primary,
+    marginBottom: 10,
+    padding: 10,
+  },
+
+  bodyText: {
+    fontSize: 18,
+    color: colors.black,
+    textAlign: 'center',
+    fontFamily: fonts.body
+  },
+
+});
