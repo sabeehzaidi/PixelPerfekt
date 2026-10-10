@@ -335,7 +335,7 @@ h3 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: var(--text); 
   pointer-events: none;
 }
 .themes-copy { max-width: 520px; pointer-events: auto; will-change: opacity; }
-.theme-step { height: 100vh; height: 100svh; }
+.theme-step { height: 80vh; height: 80svh; }
 .theme-name {
   font-size: clamp(3.4rem, 9vw, 7.5rem);
   margin-bottom: 12px;
@@ -352,7 +352,7 @@ h3 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: var(--text); 
 }
 .themes-copy.swap .theme-name,
 .themes-copy.swap .theme-desc { opacity: 0; transform: translateY(18px); filter: blur(6px); }
-.theme-dots { display: flex; gap: 10px; list-style: none; padding: 0; margin: 24px 0; }
+.theme-dots { display: flex; gap: 8px; list-style: none; padding: 0; margin: 24px 0; }
 .theme-dots li {
   width: 10px; height: 10px; border-radius: 50%;
   background: rgba(255, 255, 255, 0.18);

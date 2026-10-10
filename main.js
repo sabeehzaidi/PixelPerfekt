@@ -13,32 +13,30 @@
   /* ---------------------------------------------------------------
      Themes: colours the beads morph between as you scroll.
      --------------------------------------------------------------- */
+  // Palette = the app's first segment colour (themes.json); fill = its renderer in beads.js.
+  const B = window.TasbihBeads;
   const THEMES = [
-    { name: 'Opal', desc: 'Soft, shifting pastels that drift as you count.',
-      hi: [255, 255, 255], base: [205, 205, 212], edge: [70, 70, 80],
-      blobs: [[255, 150, 195], [165, 255, 150], [150, 200, 255]], glow: [190, 180, 255] },
-    { name: 'Gold Leaf', desc: 'Hammered gold with a warm, quiet shine.',
-      hi: [255, 242, 175], base: [214, 172, 40], edge: [72, 50, 4],
-      blobs: [[255, 218, 95], [185, 135, 22], [255, 238, 160]], glow: [214, 172, 40] },
-    { name: 'Galaxy', desc: 'Deep-space purples with a slow cosmic glow.',
-      hi: [225, 195, 255], base: [105, 52, 175], edge: [14, 5, 40],
-      blobs: [[255, 80, 205], [80, 120, 255], [165, 95, 255]], glow: [150, 90, 255] },
-    { name: 'Aurora', desc: 'Northern lights rippling across every bead.',
-      hi: [195, 255, 232], base: [30, 155, 122], edge: [3, 32, 30],
-      blobs: [[80, 255, 190], [60, 205, 255], [125, 255, 125]], glow: [60, 232, 182] },
-    { name: 'Deep Sea', desc: 'A deep sea finish, three colourways. Press play on the sonar ping.',
-      hi: [165, 242, 252], base: [20, 112, 132], edge: [2, 22, 32],
-      blobs: [[80, 222, 232], [30, 142, 172], [145, 242, 242]], glow: [40, 192, 212] },
-  ];
+    { name: 'Opal', fill: 'opal', color: '#F2EEF8', halo: '#F2EEF8', glow: [190, 180, 255],
+      desc: 'A milky gem with soft patches of colour that shift as you turn it.' },
+    { name: 'Gold Leaf', fill: 'metallic', color: '#D4AF37', halo: '#D4AF37', glow: [212, 175, 55],
+      desc: 'Polished gold marble with fine veins and a warm shine.' },
+    { name: 'Galaxy', fill: 'galaxy', color: '#9B6BFF', halo: '#9B6BFF', glow: [155, 107, 255],
+      desc: 'A nebula sealed in glass, with drifting stars and a comet circling its ring.' },
+    { name: 'Zellige', fill: 'zellige', color: '#4C86E8', halo: '#4C86E8', glow: [76, 134, 232],
+      desc: 'Glazed Moroccan tilework: eight-pointed stars in gold strapwork.' },
+    { name: 'Aurora', fill: 'aurora', color: '#3DDC97', halo: '#3DDC97', glow: [61, 220, 151],
+      desc: 'Northern lights rippling inside the glass, softly alive even at rest.' },
+    { name: 'Geode', fill: 'geode', color: '#B27CFF', halo: '#B27CFF', glow: [178, 124, 255],
+      desc: 'A cracked-open crystal geode, its facets catching the light as it turns.' },
+    { name: 'Night Garden', fill: 'nightGarden', color: '#E8588A', halo: '#E8588A', glow: [232, 88, 138],
+      desc: 'A lotus bloom glowing in the dark, its petals opening as you count.' },
+    { name: 'Ink in Water', fill: 'ink', color: '#4A56E0', halo: '#4A56E0', glow: [74, 86, 224],
+      desc: 'Ink blooming and unfurling through a pale, milky bead.' },
+    { name: 'Deep Sea', fill: 'deepSea', color: '#27D3E8', halo: '#27D3E8', glow: [39, 211, 232],
+      desc: 'The abyss, lit from above, with jellyfish drifting past.' },
+  ].map((t) => ({ ...t, rgb: B.hex(t.color), haloRgb: B.hex(t.halo) }));
 
   const mixRGB = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
-  const mixTheme = (A, B, t) => ({
-    hi: mixRGB(A.hi, B.hi, t),
-    base: mixRGB(A.base, B.base, t),
-    edge: mixRGB(A.edge, B.edge, t),
-    glow: mixRGB(A.glow, B.glow, t),
-    blobs: A.blobs.map((c, i) => mixRGB(c, B.blobs[i], t)),
-  });
   const rgba = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 
   /* ---------------------------------------------------------------
@@ -181,11 +179,12 @@
     while (i < kfs.length - 2 && sy >= kfs[i + 1].y) i++;
     const A = kfs[i], B = kfs[i + 1];
     const span = Math.max(1, B.y - A.y);
-    const t = smooth(clamp((sy - A.y) / span));
+    const lt = clamp((sy - A.y) / span);
+    const t = smooth(lt);
     return {
       x: lerp(A.x, B.x, t), cy: lerp(A.cy, B.cy, t),
       s: lerp(A.s, B.s, t), a: lerp(A.a, B.a, t),
-      ta: A.theme, tb: B.theme, t,
+      ta: A.theme, tb: B.theme, t, lt,
     };
   }
 
@@ -197,59 +196,6 @@
       x: Math.random(), y: Math.random(), z: 0.2 + Math.random() * 0.8,
       r: 0.6 + Math.random() * 1.6, ph: Math.random() * 6.28,
     }));
-  }
-
-  function drawBead(x, y, r, th, rot, alpha) {
-    if (alpha <= 0.01 || r < 1) return;
-    ctx.save();
-    // halo
-    let g = ctx.createRadialGradient(x, y, r * 0.6, x, y, r * 2.1);
-    g.addColorStop(0, rgba(th.glow, 0.2 * alpha));
-    g.addColorStop(1, rgba(th.glow, 0));
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(x, y, r * 2.1, 0, 6.2832); ctx.fill();
-
-    // body
-    ctx.globalAlpha = alpha;
-    g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.05, x, y, r);
-    g.addColorStop(0, rgba(th.hi));
-    g.addColorStop(0.38, rgba(th.base));
-    g.addColorStop(1, rgba(th.edge));
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
-
-    // swirling colour blobs, clipped to the sphere
-    ctx.save();
-    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.clip();
-    ctx.globalCompositeOperation = 'screen';
-    for (let j = 0; j < 3; j++) {
-      const a = rot + j * 2.094;
-      const bx = x + Math.cos(a) * r * 0.45;
-      const by = y + Math.sin(a * 1.2) * r * 0.45;
-      const bg = ctx.createRadialGradient(bx, by, 0, bx, by, r * 0.75);
-      bg.addColorStop(0, rgba(th.blobs[j], 0.5));
-      bg.addColorStop(1, rgba(th.blobs[j], 0));
-      ctx.fillStyle = bg;
-      ctx.fillRect(x - r, y - r, r * 2, r * 2);
-    }
-    ctx.globalCompositeOperation = 'source-over';
-    // limb darkening for the sphere look
-    const sh = ctx.createRadialGradient(x - r * 0.15, y - r * 0.2, r * 0.45, x, y, r);
-    sh.addColorStop(0, 'rgba(0,0,0,0)');
-    sh.addColorStop(1, 'rgba(0,0,0,0.5)');
-    ctx.fillStyle = sh;
-    ctx.fillRect(x - r, y - r, r * 2, r * 2);
-    ctx.restore();
-
-    // rim + specular
-    ctx.strokeStyle = 'rgba(255,255,255,0.32)';
-    ctx.lineWidth = Math.max(1, r * 0.025);
-    ctx.beginPath(); ctx.arc(x, y, r - 0.5, 0, 6.2832); ctx.stroke();
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.beginPath();
-    ctx.ellipse(x - r * 0.38, y - r * 0.46, r * 0.2, r * 0.11, -0.7, 0, 6.2832);
-    ctx.fill();
-    ctx.restore();
   }
 
   const BEADS = 7;
@@ -264,8 +210,9 @@
   function draw(sy, tm) {
     ctx.clearRect(0, 0, W, H);
     const k = sample(sy);
-    const th = mixTheme(THEMES[k.ta], THEMES[k.tb], k.t);
-    const glowStr = th.glow.map((v) => v | 0).join(',');
+    const themeA = THEMES[k.ta], themeB = THEMES[k.tb];
+    const glow = mixRGB(themeA.glow, themeB.glow, k.t);
+    const glowStr = glow.map((v) => v | 0).join(',');
     document.documentElement.style.setProperty('--glow', glowStr);
 
     const cx = W * k.x + mx * 22;
@@ -274,8 +221,8 @@
 
     // ambient glow behind the tasbih
     let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 7);
-    g.addColorStop(0, rgba(th.glow, 0.2 * k.a));
-    g.addColorStop(1, rgba(th.glow, 0));
+    g.addColorStop(0, rgba(glow, 0.2 * k.a));
+    g.addColorStop(1, rgba(glow, 0));
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
@@ -283,7 +230,7 @@
     for (const p of motes) {
       const y = mod(p.y * H - sy * 0.12 * p.z - tm * 6 * p.z, H);
       const x = p.x * W + Math.sin(tm * 0.4 + p.ph) * 14 * p.z + mx * 18 * p.z;
-      ctx.fillStyle = rgba(th.glow, 0.5 * p.z * (0.6 + 0.4 * Math.sin(tm + p.ph)));
+      ctx.fillStyle = rgba(glow, 0.5 * p.z * (0.6 + 0.4 * Math.sin(tm + p.ph)));
       ctx.beginPath(); ctx.arc(x, y, p.r * p.z, 0, 6.2832); ctx.fill();
     }
 
@@ -320,7 +267,26 @@
       });
     }
     list.sort((a, b) => a.r - b.r);
-    for (const b of list) drawBead(b.x, b.y, b.r, th, sy * 0.0035 + b.i * 1.7 + tm * 0.15, b.a);
+
+    // Each bead is painted by the app's own renderer for the active theme; between two
+    // themes the incoming one cross-fades over the outgoing one.
+    const blend = k.ta === k.tb ? 0 : clamp((k.lt - 0.3) / 0.4);
+    const beadPhase = sy * 0.0045;
+    const velocity = clamp(velSmooth, -0.5, 0.5);
+    const ambient = tm * 0.2094; // 30 s loop, as in the app
+    const paint = (theme, b, alpha) => {
+      if (alpha <= 0.01) return;
+      ctx.globalAlpha = alpha;
+      B.drawBead(ctx, {
+        x: b.x, y: b.y, R: b.r, fill: theme.fill, color: theme.rgb, halo: theme.haloRgb,
+        phase: beadPhase + b.i * 1.37, velocity, ambient,
+      });
+      ctx.globalAlpha = 1;
+    };
+    for (const b of list) {
+      if (blend < 1) paint(themeA, b, b.a);
+      if (blend > 0) paint(themeB, b, b.a * blend);
+    }
   }
 
   /* ---------------------------------------------------------------
@@ -395,19 +361,21 @@
     const tr = themesTrack.getBoundingClientRect();
     const inTrack = tr.top < vh * 0.6 && tr.bottom > vh * 0.4;
     if (inTrack) setTheme(best);
-    themesCopy.style.opacity = clamp((tr.bottom - vh * 0.55) / (vh * 0.4)).toFixed(3);
+    themesCopy.style.opacity = clamp((tr.bottom - vh * 0.5) / (vh * 0.35)).toFixed(3);
   }
 
   /* ---------------------------------------------------------------
      Loop
      --------------------------------------------------------------- */
-  let sy = scrollY;
+  let sy = scrollY, lastSy = scrollY, velSmooth = 0;
   function frame(now) {
     const target = scrollY;
     sy += (target - sy) * (reduce ? 1 : 0.085);
     if (Math.abs(target - sy) < 0.05) sy = target;
     mx += (tmx - mx) * 0.06;
     my += (tmy - my) * 0.06;
+    velSmooth += ((sy - lastSy) * 0.0045 - velSmooth) * 0.3;
+    lastSy = sy;
     const tm = reduce ? 0 : now / 1000;
     draw(sy, tm);
     updateDom(sy);
