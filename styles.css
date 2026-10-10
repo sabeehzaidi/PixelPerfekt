@@ -129,6 +129,19 @@ main, .site-footer { position: relative; z-index: 1; }
   padding: 22px max(16px, 4vw);
   mix-blend-mode: normal;
 }
+/* faded backdrop so scrolling content never collides with the header */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -28px 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
 .brand {
   font-family: var(--serif);
   font-weight: 700;
