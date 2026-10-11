@@ -473,6 +473,26 @@ h3 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: var(--text); 
 }
 .site-footer p { margin: 0; }
 
+/* ---------- store buttons ---------- */
+.stores { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 8px; }
+.cta .stores { justify-content: center; margin-top: 36px; }
+.store {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 10px 20px 10px 16px; border-radius: 14px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: rgba(0, 0, 0, 0.55); color: #fff; text-align: left;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.store svg { width: 26px; height: 26px; flex: none; color: var(--gold); }
+.store span { display: flex; flex-direction: column; line-height: 1.15; }
+.store small { font-size: .68rem; letter-spacing: .04em; color: #b8b8be; }
+.store b { font-size: 1.05rem; font-weight: 600; }
+a.store:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 8px 30px rgba(201, 162, 39, 0.25); }
+.store.soon { border-color: rgba(255, 255, 255, 0.18); cursor: default; }
+.store.soon svg { color: #8a8a90; }
+.store.soon b { color: #d0d0d4; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 800px) {
   .site-header nav { gap: 16px; font-size: 0.8rem; }
