@@ -461,7 +461,8 @@ h3 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: var(--text); 
   text-align: center;
   padding: 16vh 16px;
 }
-.cta-title { font-size: clamp(3.6rem, 14vw, 12rem); margin: 0; }
+.cta-title { font-size: clamp(2rem, 4.6vw, 3.6rem); margin: 0; max-width: 16em; text-wrap: balance; }
+.cta-sub { margin: 16px 0 0; color: var(--muted); font-size: 1rem; }
 
 .site-footer {
   padding: 32px 16px 80px;
