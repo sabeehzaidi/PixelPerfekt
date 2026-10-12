@@ -198,7 +198,7 @@ p { margin: 0; }
 .products { position: relative; padding: 4vh var(--pad) 18vh; max-width: 1240px; margin: 0 auto; }
 .product {
   position: relative; overflow: hidden; isolation: isolate;
-  display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: 24px;
+  display: grid; grid-template-columns: .85fr 1.3fr; align-items: center; gap: 16px;
   padding: clamp(32px, 6vw, 72px);
   background: #08080a; color: #f4f1ea;
   border: 1px solid var(--ink);
@@ -231,12 +231,12 @@ a.store:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--go
 .store.soon b { color: #d0d0d4; }
 
 .product-shots { position: relative; display: flex; justify-content: center; align-items: center; gap: 14px; min-height: 480px; }
-.shot { flex: 1 1 0; max-width: 230px; }
-.shot.s2 { margin-top: -6%; max-width: 250px; z-index: 2; }
+.shot { flex: 1 1 0; max-width: 270px; }
+.shot.s2 { margin-top: -6%; max-width: 300px; z-index: 2; }
 .shot.s3 { margin-top: 8%; }
 .device {
-  border-radius: 20px; overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 24px; overflow: hidden;
+  border: 4px solid #25252a;
   box-shadow: 0 30px 70px rgba(0, 0, 0, .55);
   background: #000;
 }
@@ -277,7 +277,7 @@ a.store:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--go
   .card { min-height: 0; }
   .product { grid-template-columns: 1fr; }
   .product-shots { min-height: 0; margin-top: 24px; gap: 8px; }
-  .device { border-radius: 14px; }
+  .device { border-radius: 18px; border-width: 3px; }
   .cue { display: none; }
 }
 
