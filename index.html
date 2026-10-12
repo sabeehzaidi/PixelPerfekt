@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PixelPerfekt — Apps and client work</title>
+  <meta name="description" content="PixelPerfekt is a small studio that builds its own apps and partners with clients to design and build theirs. Home of Digital Tasbih.">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta property="og:title" content="PixelPerfekt">
+  <meta property="og:description" content="A small studio building its own apps and partnering with clients to build theirs.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Crect width='7' height='7' fill='%230c0d10'/%3E%3Cpath fill='%232f5bff' d='M1 1h4v1H1zM1 2h1v4H1zM4 2h1v2H4zM1 3h4v1H1z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="gridbg" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="PixelPerfekt home">
+      <svg class="logo" viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true"><rect width="7" height="7" fill="currentColor"/><path fill="var(--blue)" d="M1 1h4v1H1zM1 2h1v4H1zM4 2h1v2H4zM1 3h4v1H1z"/></svg>
+      <span>PixelPerfekt</span>
+    </a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#products">Products</a>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <i class="px" style="left:8%;top:78%;--s:14px;--c:var(--blue)" data-speed=".25" aria-hidden="true"></i>
+      <i class="px" style="left:46%;top:16%;--s:10px;--c:var(--coral)" data-speed="-.18" aria-hidden="true"></i>
+      <i class="px" style="left:90%;top:70%;--s:20px;--c:var(--ink)" data-speed=".32" aria-hidden="true"></i>
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><i class="sq"></i> Apps and client work</p>
+        <h1 data-split>Built to the last pixel.</h1>
+        <p class="lede reveal" style="--d:.45s">PixelPerfekt is a small studio. We build our own apps and partner with clients to design and build theirs, with the same care for every detail.</p>
+        <div class="cta-row reveal" style="--d:.6s">
+          <a class="btn" href="mailto:hello@pixelperfekt.ca">Start a project</a>
+          <a class="btn ghost" href="#products">See our work</a>
+        </div>
+      </div>
+      <p class="readout" id="readout" aria-hidden="true">CELL 24PX</p>
+      <a class="cue" href="#about" aria-label="Scroll down"><span class="cue-line"></span>Scroll</a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Apps<i></i></span><span>Client work<i></i></span><span>Design<i></i></span><span>Engineering<i></i></span><span>Detail<i></i></span>
+        <span>Apps<i></i></span><span>Client work<i></i></span><span>Design<i></i></span><span>Engineering<i></i></span><span>Detail<i></i></span>
+      </div>
+    </div>
+
+    <!-- ABOUT (scroll-scrubbed) -->
+    <section class="about" id="about">
+      <i class="px" style="left:6%;top:20%;--s:12px;--c:var(--coral)" data-speed=".2" aria-hidden="true"></i>
+      <i class="px" style="left:88%;top:62%;--s:16px;--c:var(--blue)" data-speed="-.22" aria-hidden="true"></i>
+      <p class="label reveal">About</p>
+      <p class="scrub" data-scrub>Good software is mostly details nobody notices: the spacing, the timing, the one pixel that is out of place. We sweat them so you do not have to.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="section-head">
+        <p class="label reveal">What we do</p>
+        <h2 data-split>Two ways we work</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal" style="--d:0s">
+          <span class="num">01</span>
+          <h3>Our own apps</h3>
+          <p>We design, build and publish apps under the PixelPerfekt name, from the first sketch to the store listing and every update after.</p>
+          <ul class="tags"><li>Mobile</li><li>Design</li><li>Publishing</li></ul>
+        </article>
+        <article class="card reveal" style="--d:.14s">
+          <span class="num">02</span>
+          <h3>Client work</h3>
+          <p>We partner with founders and teams to build apps and websites. Small team, direct communication and a careful finish.</p>
+          <ul class="tags"><li>Mobile apps</li><li>Websites</li><li>Product design</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+      <div class="section-head">
+        <p class="label reveal">Products</p>
+        <h2 data-split>Made by us</h2>
+      </div>
+
+      <article class="product">
+        <div class="product-glow" data-speed=".1" aria-hidden="true"></div>
+        <i class="px gold" style="left:48%;top:12%;--s:10px" data-speed=".3" aria-hidden="true"></i>
+        <i class="px gold" style="left:44%;top:84%;--s:14px" data-speed="-.2" aria-hidden="true"></i>
+        <i class="px gold" style="left:94%;top:30%;--s:8px" data-speed=".4" aria-hidden="true"></i>
+        <div class="product-copy">
+          <p class="pix-label reveal">Product 01</p>
+          <h3 class="product-name" data-split>Digital Tasbih</h3>
+          <p class="reveal" style="--d:.2s">A calm, beautiful tasbih counter. Tap through your dhikr on glowing beads, keep your streak alive and collect themes that make every session feel considered.</p>
+          <ul class="facts reveal" style="--d:.3s">
+            <li>Nine collectible bead themes</li>
+            <li>Streaks and achievements</li>
+            <li>Android now, iOS coming soon</li>
+          </ul>
+          <div class="stores reveal" style="--d:.4s">
+            <a class="store" href="https://play.google.com/store/apps/details?id=com.pixelperfekt.digitaltasbih" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.6 1.8c-.3.2-.5.6-.5 1.1v18.2c0 .5.2.9.5 1.1l10-10.2L3.6 1.8zm11.4 9.2 2.9-2.9L5.4 1.1c-.3-.2-.7-.2-1 0L15 11zm0 2L4.4 22.9c.3.2.7.2 1 0l12.5-7L15 13zm4-3.2-2.2 2.2 2.2 2.2 2.6-1.5c.8-.5.8-1.4 0-1.9L19 9.8z"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+            <span class="store soon" aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.900-3.6-1.9-1.5-.2-3 .9-3.800.9s-2-.9-3.200-.9C6.300 7 4.800 7.900 4 9.300c-1.700 2.900-.4 7.200 1.200 9.500.8 1.200 1.800 2.400 3 2.400 1.200 0 1.700-.8 3.100-.8s1.900.8 3.200.8 2.100-1.100 2.900-2.300c.9-1.300 1.300-2.600 1.300-2.700-.1 0-2.300-.9-2.300-3.600zM14 5.200c.7-.8 1.100-1.900 1-3-1 0-2.100.7-2.800 1.500-.6.700-1.100 1.800-1 2.900 1.100.1 2.100-.5 2.800-1.400z"/></svg><span><small>Coming soon to</small><b>App Store</b></span></span>
+          </div>
+        </div>
+        <div class="product-shots">
+          <div class="shot s1"><div class="shot-par" data-speed=".14" data-rot="-3"><div class="device"><img src="assets/img/tasbih-themes.webp" width="540" height="1035" loading="lazy" alt="Digital Tasbih theme picker"></div></div></div>
+          <div class="shot s2"><div class="shot-par" data-speed="-.06"><div class="device"><img src="assets/img/tasbih-counter.webp" width="540" height="1035" loading="lazy" alt="Digital Tasbih counting screen"></div></div></div>
+          <div class="shot s3"><div class="shot-par" data-speed=".22" data-rot="3"><div class="device"><img src="assets/img/tasbih-preview.webp" width="540" height="1035" loading="lazy" alt="Digital Tasbih Deep Sea theme preview"></div></div></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <i class="px" style="left:58%;top:22%;--s:18px;--c:var(--blue)" data-speed=".28" aria-hidden="true"></i>
+      <i class="px" style="left:84%;top:18%;--s:10px;--c:var(--coral)" data-speed="-.2" aria-hidden="true"></i>
+      <i class="px" style="left:76%;top:76%;--s:14px;--c:var(--ink)" data-speed=".2" aria-hidden="true"></i>
+      <p class="label reveal">Contact</p>
+      <h2 data-split>Have something in mind?</h2>
+      <p class="reveal" style="--d:.2s">Tell us about your project, or just say hello.</p>
+      <a class="mail reveal" style="--d:.3s" href="mailto:hello@pixelperfekt.ca">hello@pixelperfekt.ca</a>
+      <button class="copy reveal" style="--d:.4s" type="button" id="copy">Copy email</button>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year">2026</span> PixelPerfekt. All rights reserved.</p>
+    <p><a href="mailto:hello@pixelperfekt.ca">hello@pixelperfekt.ca</a></p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
